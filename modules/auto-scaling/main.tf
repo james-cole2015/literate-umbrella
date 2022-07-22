@@ -13,6 +13,8 @@ resource "aws_launch_configuration" "asg_config" {
   image_id      = data.aws_ami.ubuntu.id
   instance_type = var.instance-type
   user_data     = file("ws_bootstrap.sh")
+  security_groups = var.security_group
+
 
   lifecycle {
     create_before_destroy = true
