@@ -14,6 +14,7 @@ resource "aws_launch_configuration" "asg_config" {
   instance_type = var.instance-type
   user_data     = file("ws_bootstrap.sh")
   security_groups = var.security_group
+  key_name = var.key_name
 
 
   lifecycle {

@@ -18,3 +18,6 @@ variable "subnet_id" {
 variable "security_group" {
   type = any
 }
+variable "key_name" {
+  type = any
+}
