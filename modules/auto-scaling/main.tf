@@ -7,7 +7,7 @@ data "aws_ami" "ubuntu" {
     values = ["x86_64"]
   }
 }
-
+/*
 resource "aws_launch_configuration" "asg_config" {
   name_prefix   = "${var.repo-name}-instance-"
   image_id      = data.aws_ami.ubuntu.id
@@ -21,7 +21,7 @@ resource "aws_launch_configuration" "asg_config" {
     create_before_destroy = true
   }
 }
-
+*/
 resource "aws_autoscaling_group" "asg" {
   name                 = "${var.repo-name}-asg"
   launch_configuration = aws_launch_configuration.asg_config.name
