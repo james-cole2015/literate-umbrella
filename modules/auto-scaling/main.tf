@@ -23,9 +23,9 @@ resource "aws_launch_configuration" "asg_config" {
 }
 */
 
-## Launch Template
+## Webserver Launch Template
 resource "aws_launch_template" "lu-launch-template" {
-  name = "${var.repo-name}-launch-template"
+  name = "${var.repo-name}-webserver-LT"
 
   credit_specification {
     cpu_credits = "standard"
@@ -50,6 +50,33 @@ resource "aws_launch_template" "lu-launch-template" {
   }
 }
 
+## Bastion Host Launch Template
+resource "aws_launch_template" "bastion-host-launch-template" {
+  name = "${var.repo-name}-bastion-host-LT"
+
+  credit_specification {
+    cpu_credits = "standard"
+  }
+
+  image_id = data.aws_ami.ubuntu.id 
+  instance_type = var.instance-type
+  key_name = var.key_name
+  ## Remember to update this
+  vpc_security_group_ids = var.security_group
+
+  #user_data = filebase64("ws_bootstrap.sh")
+
+  tag_specifications {
+    resource_type = "instance" 
+
+    tags = {
+      Name = "${var.repo-name}-bastion-host"
+      environment = "dev"
+      platform = "terraform"
+    }
+  }
+}
+
 
 ## Auto Scaling Group
 resource "aws_autoscaling_group" "asg" {
@@ -67,4 +94,16 @@ resource "aws_autoscaling_group" "asg" {
     id = aws_launch_template.lu-launch-template.id
     version = "$Latest"
   }
+}
+
+## Data outputs
+
+data "aws_instances" "asg_instances_meta" {
+  instance_tags = {
+    Name = "${var.repo-name}-webserver"
+    }
+  }
+
+output "public_ips" {
+  value = data.aws_instances.asg_instances_meta.public_ips
 }
