@@ -4,14 +4,15 @@ This is an evolution of the [space-monkey](https://github.com/james-cole2015/spa
 
 ## Repo Goals
 - [X] Add auto scaling group for webserver
-- [ ] Add auto scaling group for bastion host
+- [X] Add auto scaling group for bastion host
 - [ ] Add elastic load balancer for webserver
 - [ ] ~~Add security group to webserver to allow access only from bastion host~~
 - [ ] ~~Add security group to bastion host to only allow access from terraform server~~ 
 
 ## High Level Commits 
-- Created launch configuration and autoscaling group
+- Created launch configuration and autoscaling group for webserver
 - Added security groups that allow SSH, HTTP, HTTPS
 - Added SSH key to remotely access
 - Added launch template for webserver 
 - Added launch template for bastion host 
+- Added auto scaling group for bastion host
