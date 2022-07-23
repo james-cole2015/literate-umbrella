@@ -50,6 +50,7 @@ resource "aws_launch_template" "lu-launch-template" {
   }
 }
 
+/*
 ## Bastion Host Launch Template
 resource "aws_launch_template" "bastion-host-launch-template" {
   name = "${var.repo-name}-bastion-host-LT"
@@ -76,11 +77,11 @@ resource "aws_launch_template" "bastion-host-launch-template" {
     }
   }
 }
+*/
 
-
-## Auto Scaling Group
+## Auto Scaling Groups
 resource "aws_autoscaling_group" "asg" {
-  name                 = "${var.repo-name}-asg"
+  name                 = "${var.repo-name}-webserver-asg"
   #launch_configuration = aws_launch_configuration.asg_config.name
   min_size             = 2
   max_size             = 3

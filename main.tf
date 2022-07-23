@@ -5,7 +5,6 @@ module "auto-scaling" {
   subnet_id = module.networking.vpc.public_subnets[0]
   security_group = [module.networking.webserver-sg.id]
   key_name = module.key_gen.key_name
-
 }
 
 module "networking" {
@@ -19,3 +18,11 @@ module "key_gen" {
   repo-name = var.repo-name
 }
 
+module "bastion-auto-scaling" {
+  source    = "./modules/bastion-asg"
+  repo-name = var.repo-name
+  #vpc_zone_identifier = module.networking.vpc.vpc_id
+  subnet_id = module.networking.vpc.public_subnets[0]
+  security_group = [module.networking.bastion-host-sg.id]
+  key_name = module.key_gen.key_name
+}
