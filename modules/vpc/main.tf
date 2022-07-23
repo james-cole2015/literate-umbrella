@@ -12,6 +12,8 @@ module "vpc" {
   single_nat_gateway = true
 }
 
+
+### CHANGE SSH BACK WHEN YOU CREATE THE BASTION HOST!! 
 resource "aws_security_group" "webserver-sg" {
   name        = "webserver-sg"
   description = "Allow webserver traffic"
@@ -22,7 +24,7 @@ resource "aws_security_group" "webserver-sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${chomp(data.http.terraform_ip.body)}/32"]
   }
 
   egress {
@@ -64,4 +66,8 @@ resource "aws_security_group" "webserver-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+data "http" "terraform_ip" {
+  url = "http://ipv4.icanhazip.com"
 }
