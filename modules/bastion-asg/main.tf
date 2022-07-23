@@ -9,18 +9,18 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  name                 = "${var.repo-name}-bastion-host-asg"
+  name = "${var.repo-name}-bastion-host-asg"
   #launch_configuration = aws_launch_configuration.asg_config.name
-  min_size             = 1
-  max_size             = 2
-  vpc_zone_identifier  = [var.subnet_id]
+  min_size            = 1
+  max_size            = 2
+  vpc_zone_identifier = [var.subnet_id]
 
   lifecycle {
     create_before_destroy = true
   }
 
   launch_template {
-    id = aws_launch_template.bastion-host-launch-template.id
+    id      = aws_launch_template.bastion-host-launch-template.id
     version = "$Latest"
   }
 }
@@ -33,21 +33,21 @@ resource "aws_launch_template" "bastion-host-launch-template" {
     cpu_credits = "standard"
   }
 
-  image_id = data.aws_ami.ubuntu.id 
+  image_id      = data.aws_ami.ubuntu.id
   instance_type = var.instance-type
-  key_name = var.key_name
+  key_name      = var.key_name
   ## Remember to update this
   vpc_security_group_ids = var.security_group
 
   #user_data = filebase64("ws_bootstrap.sh")
 
   tag_specifications {
-    resource_type = "instance" 
+    resource_type = "instance"
 
     tags = {
-      Name = "${var.repo-name}-bastion-host"
+      Name        = "${var.repo-name}-bastion-host"
       environment = "dev"
-      platform = "terraform"
+      platform    = "terraform"
     }
   }
 }
