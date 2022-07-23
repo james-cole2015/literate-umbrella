@@ -5,6 +5,7 @@ module "auto-scaling" {
   subnet_id      = module.networking.vpc.public_subnets[0]
   security_group = [module.networking.webserver-sg.id]
   key_name       = module.key_gen.key_name
+  target_group_arns = module.elastic-load-balancer.elb_id
 }
 
 module "networking" {
@@ -25,4 +26,9 @@ module "bastion-auto-scaling" {
   subnet_id      = module.networking.vpc.public_subnets[0]
   security_group = [module.networking.bastion-host-sg.id]
   key_name       = module.key_gen.key_name
+}
+
+module "elastic-load-balancer" {
+  source = "./modules/load-balancer"
+  repo-name = var.repo-name
 }
