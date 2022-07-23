@@ -76,8 +76,10 @@ resource "aws_launch_template" "bastion-host-launch-template" {
       platform = "terraform"
     }
   }
-}
-*/
+  }*/
+
+
+
 
 ## Auto Scaling Groups
 resource "aws_autoscaling_group" "asg" {
@@ -86,6 +88,7 @@ resource "aws_autoscaling_group" "asg" {
   min_size            = 2
   max_size            = 3
   vpc_zone_identifier = [var.subnet_id]
+  target_group_arns   = [var.target_group_arns]
 
   lifecycle {
     create_before_destroy = true
