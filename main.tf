@@ -29,9 +29,9 @@ module "bastion-auto-scaling" {
 }
 
 module "elastic-load-balancer" {
-  source    = "./modules/load-balancer"
-  repo-name = var.repo-name
-  security_group    = [module.networking.webserver-sg.id]
-  subnet_id         = [module.networking.vpc.public_subnets[0],module.networking.vpc.public_subnets[1]]
-  vpc = module.networking.vpc.vpc_id
+  source         = "./modules/load-balancer"
+  repo-name      = var.repo-name
+  security_group = [module.networking.webserver-sg.id]
+  subnet_id      = [module.networking.vpc.public_subnets[0], module.networking.vpc.public_subnets[1]]
+  vpc            = module.networking.vpc.vpc_id
 }
