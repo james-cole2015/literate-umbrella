@@ -23,10 +23,9 @@ resource "aws_lb_target_group" "lu-target-group" {
   vpc_id   = var.vpc
 }
 
-## load balancer listener 
-
+/*## load balancer attachment to target group
 resource "aws_lb_target_group_attachment" "lu-tg-attachment" {
   target_group_arn = aws_lb_target_group.lu-target-group.arn
   target_id = aws_lb.lu-alb.arn
   port = 80
-}
+}*/
