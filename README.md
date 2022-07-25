@@ -17,3 +17,7 @@ This is an evolution of the [space-monkey](https://github.com/james-cole2015/spa
 - Added launch template for bastion host 
 - Added auto scaling group for bastion host
 - Added load balancer, target group, & listener
+
+
+![Final Architecture Diagram](https://github.com/james-cole2015/literate-umbrella/blob/main/literate-umbrella_final.jpg)[^1]
+[^1]: [Image generated from Terraform Visual](https://hieven.github.io/terraform-visual/)
