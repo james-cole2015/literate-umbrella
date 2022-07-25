@@ -4,7 +4,7 @@ resource "tls_private_key" "rsa" {
 }
 
 module "key_pair" {
-  source = "terraform-aws-modules/key-pair/aws"
+  source  = "terraform-aws-modules/key-pair/aws"
   version = "2.0.0"
 
   key_name   = "${var.repo-name}-tf_key"
