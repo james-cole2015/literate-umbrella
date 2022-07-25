@@ -32,14 +32,14 @@ resource "aws_lb_target_group_attachment" "lu-tg-attachment" {
 
 
 ## load balancer listener 
- resource "aws_lb_listener" "lu-alb" {
+resource "aws_lb_listener" "lu-alb" {
   load_balancer_arn = aws_lb.lu-alb.arn
-  port = 80
-  protocol = "HTTP"
+  port              = 80
+  protocol          = "HTTP"
 
   default_action {
-    type = "forward"
+    type             = "forward"
     target_group_arn = aws_lb_target_group.lu-target-group.arn
   }
 
- }
+}
