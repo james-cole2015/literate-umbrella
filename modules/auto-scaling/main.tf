@@ -85,8 +85,8 @@ resource "aws_launch_template" "bastion-host-launch-template" {
 resource "aws_autoscaling_group" "asg" {
   name = "${var.repo-name}-webserver-asg"
   #launch_configuration = aws_launch_configuration.asg_config.name
-  min_size            = 2
-  max_size            = 3
+  min_size            = 3
+  max_size            = 4
   vpc_zone_identifier = [var.subnet_id]
   target_group_arns   = [var.target_group_arns]
 
